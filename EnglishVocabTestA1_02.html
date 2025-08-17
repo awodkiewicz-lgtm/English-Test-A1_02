@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEFR A1 English Vocabulary Test</title>
+    <style>
+        /* Basic Styling for the Test Module */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #quiz-container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .quiz-header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 20px 30px;
+        }
+
+        .quiz-header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        
+        .quiz-header p {
+            margin: 5px 0 0;
+            opacity: 0.9;
+        }
+
+        .quiz-body {
+            padding: 30px;
+        }
+
+        #email-module h2, #quiz-module h2, #results-module h2 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        #email-form input {
+            width: 80%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .btn {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 85%;
+        }
+
+        .btn:hover {
+            background-color: #4a9e4a;
+        }
+        
+        .option-btn {
+            display: block;
+            width: 100%;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: left;
+            margin-bottom: 10px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .option-btn:hover:not([disabled]) {
+            background-color: #e0e0e0;
+            border-color: #4a90e2;
+        }
+        
+        .option-btn.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+        
+        .option-btn.wrong {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+        
+        .option-btn:disabled {
+            cursor: not-allowed;
+        }
+
+        #progress-text {
+            color: #777;
+            margin-bottom: 20px;
+        }
+        
+        #results-module p {
+            font-size: 1.2em;
+            color: #555;
+        }
+        
+        #feedback {
+            text-align: left;
+            background-color: #eef5fd;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #4a90e2;
+            margin-top: 20px;
+        }
+
+        /* Hide elements initially */
+        #quiz-module, #results-module {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="quiz-container">
+        <div class="quiz-header">
+            <h1>English Vocabulary Test</h1>
+            <p>CEFR Level A1</p>
+        </div>
+       
+       
+       
+       
+       
+       
+        <div class="quiz-body">
+            <!-- Module 1: Email Collection -->
+            <div id="email-module">
+                <h2>Start Your Test</h2>
+                <p>Enter your email to begin and receive your results.</p>
+                <form id="email-form">
+                    <input type="email" id="email" placeholder="your.email@example.com" required>
+                    <button type="submit" class="btn">Start Test</button>
+                </form>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Module 2: The Quiz -->
+            <div id="quiz-module">
+                <p id="progress-text">Question 1 of 20</p>
+                <h2 id="question-text">Question goes here...</h2>
+                <div id="answer-buttons">
+                    <!-- Buttons will be generated here -->
+                </div>
+            </div>
+
+
+
+
+
+            <!-- Module 3: Results and Feedback -->
+            <div id="results-module">
+                <h2>Test Complete!</h2>
+                <p id="score-text">Your score is: 18 / 20</p>
+                <h3 id="level-text">Your estimated level is: Solid A1</h3>
+                <div id="feedback">
+                    <h4>Feedback & How to Improve:</h4>
+                    <p id="feedback-text">Here is some advice...</p>
+                </div>
+                <button class="btn" onclick="location.reload()" style="margin-top: 20px; background-color: #4a90e2;">Take Test Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- QUIZ DATA ---
+        const quizQuestions = [
+            { question: "What is your ______?", options: ["old", "name", "from", "book"], answer: "name" },
+            { question: "I have two ______.", options: ["eye", "foot", "hands", "nose"], answer: "hands" },
+            { question: "The opposite of 'big' is ______.", options: ["long", "small", "new", "fast"], answer: "small" },
+            { question: "I write with a ______.", options: ["chair", "table", "pen", "window"], answer: "pen" },
+            { question: "A cat says ______.", options: ["woof", "meow", "oink", "moo"], answer: "meow" },
+            { question: "What ______ is the sky? It is blue.", options: ["number", "food", "name", "color"], answer: "color" },
+            { question: "I eat an ______ for a snack.", options: ["apple", "car", "shoe", "house"], answer: "apple" },
+            { question: "My mother's son is my ______.", options: ["sister", "brother", "aunt", "father"], answer: "brother" },
+            { question: "The number after seven is ______.", options: ["six", "ten", "nine", "eight"], answer: "eight" },
+            { question: "I live in a ______.", options: ["book", "house", "bag", "street"], answer: "house" },
+            { question: "To drink, I use a ______.", options: ["plate", "fork", "glass", "knife"], answer: "glass" },
+            { question: "The day after Monday is ______.", options: ["Sunday", "Wednesday", "Tuesday", "Friday"], answer: "Tuesday" },
+            { question: "I read a ______.", options: ["song", "book", "picture", "game"], answer: "book" },
+            { question: "My father and mother are my ______.", options: ["children", "friends", "parents", "teachers"], answer: "parents" },
+            { question: "I wear a hat on my ______.", options: ["foot", "hand", "head", "leg"], answer: "head" },
+            { question: "The sun is ______.", options: ["cold", "hot", "wet", "dark"], answer: "hot" },
+            { question: "We go to ______ to learn.", options: ["school", "park", "shop", "bank"], answer: "school" },
+            { question: "A baby dog is a ______.", options: ["kitten", "puppy", "lion", "fish"], answer: "puppy" },
+            { question: "'Hello' and 'Goodbye' are ______.", options: ["numbers", "animals", "greetings", "colors"], answer: "greetings" },
+            { question: "I sleep in my ______.", options: ["kitchen", "bathroom", "garden", "bedroom"], answer: "bedroom" }
+        ];
+
+        // --- DOM ELEMENTS ---
+        const emailModule = document.getElementById('email-module');
+        const quizModule = document.getElementById('quiz-module');
+        const resultsModule = document.getElementById('results-module');
+        const emailForm = document.getElementById('email-form');
+        const questionText = document.getElementById('question-text');
+        const answerButtons = document.getElementById('answer-buttons');
+        const progressText = document.getElementById('progress-text');
+        const scoreText = document.getElementById('score-text');
+        const levelText = document.getElementById('level-text');
+        const feedbackText = document.getElementById('feedback-text');
+
+        // --- STATE VARIABLES ---
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        // --- EVENT LISTENERS ---
+        emailForm.addEventListener('submit', handleFormSubmit);
+
+        // --- FUNCTIONS ---
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const formData = new FormData();
+            formData.append("email", email);
+
+            // Send email to Formspree
+            try {
+                // IMPORTANT: Replace with your Formspree endpoint
+                const response = await fetch('https://formspree.io/f/mgvzbazq', {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (!response.ok) {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                console.error('There was a problem with the form submission:', error);
+                // We can still start the quiz even if submission fails
+            }
+            
+            // Start the quiz
+            emailModule.style.display = 'none';
+            quizModule.style.display = 'block';
+            startQuiz();
+        }
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            resetState();
+            const currentQuestion = quizQuestions[currentQuestionIndex];
+            questionText.innerText = currentQuestion.question;
+            progressText.innerText = `Question ${currentQuestionIndex + 1} of ${quizQuestions.length}`;
+
+            currentQuestion.options.forEach(option => {
+                const button = document.createElement('button');
+                button.innerText = option;
+                button.classList.add('btn', 'option-btn');
+                button.addEventListener('click', () => selectAnswer(button, option, currentQuestion.answer));
+                answerButtons.appendChild(button);
+            });
+        }
+
+
+        function selectAnswer(button, selectedOption, correctAnswer) {
+            if (selectedOption === correctAnswer) {
+                score++;
+                button.classList.add('correct');
+            } else {
+                button.classList.add('wrong');
+            }
+
+            // Disable all buttons and show the correct answer
+            Array.from(answerButtons.children).forEach(btn => {
+                if(btn.innerText === correctAnswer) {
+                    btn.classList.add('correct');
+                }
+                btn.disabled = true;
+            });
+            
+            // Move to next question or show results
+            setTimeout(() => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < quizQuestions.length) {
+                    showQuestion();
+                } else {
+                    showResults();
+                }
+            }, 1200); // 1.2 second delay
+        }
+
+        function showResults() {
+            quizModule.style.display = 'none';
+            resultsModule.style.display = 'block';
+
+            scoreText.innerText = `Your score is: ${score} / ${quizQuestions.length}`;
+            
+            let level, feedback;
+
+            if (score >= 18) {
+                level = "Excellent! Your level is Solid A1.";
+                feedback = "You have a strong grasp of basic English vocabulary. To move to A2, start learning vocabulary for daily routines, hobbies, and describing simple past events.";
+            } else if (score >= 14) {
+                level = "Good Job! You are at the A1 Level.";
+                feedback = "Your vocabulary is good for this level. To improve, review words related to family, places in a city, and common foods. Practice using them in simple sentences.";
+            } else if (score >= 8) {
+                level = "You are on your way. Your level is emerging A1.";
+                feedback = "You know some basic words, which is a great start! Focus on learning the most common nouns (objects, people), verbs (actions), and adjectives (descriptions). Using flashcards can be very helpful.";
+            } else {
+                level = "You are at the beginning of your journey (Pre-A1).";
+                feedback = "Welcome to learning English! Start by learning the alphabet, numbers 1-20, colors, and greetings. Watch videos for children to hear simple words in context.";
+            }
+            
+            levelText.innerText = level;
+            feedbackText.innerText = feedback;
+        }
+
+        function resetState() {
+            while (answerButtons.firstChild) {
+                answerButtons.removeChild(answerButtons.firstChild);
+            }
+        }
+    </script>
+</body>
+</html>
